@@ -1,8 +1,11 @@
 <x-app-layout>
     <h1>Hello world</h1>
-    <h3>{{$games[0]->name}}</h3>
-    <p>{{$games[0]->description}}</p>
-{{--    zou een cutoff van de description mogelijk zijn waarbij je kort text ziet
-        en erop moet klikken om verder te lezen? opzoeken--}}
-    <p>{{$games[0]->time}} hours to complete with a {{$games[0]->difficulty}} difficulty rating</p>
+    @foreach ($games as $game)
+        <h3>{{$game->name}}</h3>
+        <p>{{$game->description}}</p>
+{{--        zou een cutoff van de description mogelijk zijn waarbij je kort text ziet--}}
+{{--        en erop moet klikken om verder te lezen? opzoeken--}}
+        <p>{{$game->time}} hours to complete with a {{$game->difficulty}} difficulty rating</p>
+        <a href="{{ route('games.show', $game) }}">View Details</a>
+    @endforeach
 </x-app-layout>

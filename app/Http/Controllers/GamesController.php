@@ -18,4 +18,9 @@ class GamesController extends Controller
 //        $games->genre = 'Action-adventure';
 //        return view('games', compact('games'));
     }
+
+    public function show(Games $game)
+    {
+        return view('games.show', compact('game'));
+    }
 }
