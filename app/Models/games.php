@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class games extends Model
 {
     //
+
+    public function genre(): BelongsTo
+    {
+        return $this->belongsTo(genres::class);
+    }
 }
-$games = new games();
-$games->name = 'The Legend of Zelda: Breath of the Wild';
-$games->genre = 'Action-adventure';
+//$games = new games();
+//$games->name = 'The Legend of Zelda: Breath of the Wild';
+//$games->genre = 'Action-adventure';

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('genre', 100);
+            $table->foreignId('genre_id')->constrained();
             $table->text('description');
             $table->string('trophies', 50);
             $table->string('time', 50);

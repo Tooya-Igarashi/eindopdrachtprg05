@@ -44,7 +44,11 @@ Route::get('contact', [HomeController::class, 'contact'])
 Route::get('games', [GamesController::class, 'index'])
     ->name(name: 'games');
 
-Route::get('/games/{game}', [GamesController::class, 'show'])->name('games.show');
+//Route::get('/games/{game}', [GamesController::class, 'show'])->name('games.show');
+
+Route::resource('games', GamesController::class);
+
+Route::resource('create', GamesController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

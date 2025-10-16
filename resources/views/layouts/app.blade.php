@@ -36,7 +36,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="text-white">
+            <main class="text-blue-500">
                 {{ $slot }}
             </main>
         </div>

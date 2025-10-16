@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\games;
+use App\Models\genres;
 use Illuminate\Http\Request;
 
 class GamesController extends Controller
@@ -23,4 +24,45 @@ class GamesController extends Controller
     {
         return view('games.show', compact('game'));
     }
+
+    //voor veel op 1 relatie
+    //database tabel ->migration
+    //model nodig
+    //data ophalen
+    //meesturen aan de view
+    // <select> in de view
+    public function create()
+    {
+        $genres = genres::all();
+        return view('games.create', compact('genres'));
+    }
+
+    //form data
+    public function store(Request $request)
+    {
+        //validate
+        $request->validate([
+            'name' => 'required|max:100'
+        ]);
+
+        //inset into sql
+        $game = new Games();
+        $game->name = $request->input('name');
+        $game->genre_id = $request->input('genre_id');
+        $game->description = $request->input('description');
+        $game->trophies = 10;
+        $game->time = 10;
+        $game->difficulty = '3/10';
+
+        $game->save();
+
+        //redirect
+        return redirect()->route('games.index');
+    }
+//    public function show($id)
+//    {
+//        $game = Games::findOrFail($id);
+//        return view('games.show', compact('game'));
+//    }
+//}
 }
