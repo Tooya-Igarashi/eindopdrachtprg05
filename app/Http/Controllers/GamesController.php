@@ -42,7 +42,11 @@ class GamesController extends Controller
     {
         //validate
         $request->validate([
-            'name' => 'required|max:100'
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'trophies' => 'required|numeric:',
+            'time' => 'required|numeric',
+            'difficulty' => 'required|max:10',
         ]);
 
         //inset into sql
@@ -50,9 +54,9 @@ class GamesController extends Controller
         $game->name = $request->input('name');
         $game->genre_id = $request->input('genre_id');
         $game->description = $request->input('description');
-        $game->trophies = 10;
-        $game->time = 10;
-        $game->difficulty = '3/10';
+        $game->trophies = $request->input('trophies');
+        $game->time = $request->input('time');
+        $game->difficulty = $request->input('difficulty');
 
         $game->save();
 
