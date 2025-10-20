@@ -1,6 +1,9 @@
 <x-app-layout>
-<!-- Page Content -->
-<main>
+    <x-slot name="header">
+        Game collection</x-slot>
+    <x-slot name="header_text">
+        Discover our curated selection of games with detailed information and ratings</x-slot>
+        <main>
 
     <!-- Games Section -->
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -10,10 +13,11 @@
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $game->name }}</h3>
+                        <h4>{{$game->genre->name}}</h4>
 
                         <!-- Description with cutoff -->
                         <p class="text-gray-600 mb-4 line-clamp-3">
-                            {{ Str::limit($game->description, 150) }}
+                            {{ Str::limit($game->description, 50) }}
                         </p>
 
                         <!-- Game Stats -->
@@ -38,10 +42,6 @@
                             <a href="{{ route('games.show', $game) }}"
                                class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
                                 View Details
-                            </a>
-                            <a href="{{ route('games.edit', $game) }}"
-                               class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
-                                Edit
                             </a>
                         </div>
                     </div>

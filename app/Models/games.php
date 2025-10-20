@@ -9,6 +9,15 @@ class games extends Model
 {
     //
 
+    protected $fillable = [
+        'name',
+        'genre_id',
+        'description',
+        'trophies',
+        'time',
+        'difficulty',
+    ];
+
     public function genre(): BelongsTo
     {
         return $this->belongsTo(genres::class);

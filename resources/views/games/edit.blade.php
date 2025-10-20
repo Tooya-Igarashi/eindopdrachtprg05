@@ -1,23 +1,22 @@
 <x-app-layout>
-    <x-slot name="header">
-        Create game
-    </x-slot>
+<x-slot name="header">
+    Edit Game: {{ $game->name }}</x-slot>
     <x-slot name="header_text">
-        Create a new game post</x-slot>
+        Edit information on your post</x-slot>
     <div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white shadow-sm rounded-lg p-6">
-            <h1 class="text-2xl font-bold text-gray-900 mb-6">Add New Game</h1>
+            <h1 class="text-2xl font-bold text-gray-900 mb-6">Update {{$game->name}}</h1>
 
-            <form method="post" action="{{ route('games.store') }}" class="space-y-6">
+            <form method="post" action="{{ route('games.update', $game) }}" class="space-y-6">
                 @csrf
-
+                @method('Patch')
                 <!-- Name Field -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Game Name</label>
                     <input type="text"
                            name="name"
                            id="name"
-                           value="{{ old('name') }}"
+                           value="{{$game->name}}"
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="Enter game name">
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -30,7 +29,7 @@
                             id="genre_id"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                         @foreach($genres as $genre)
-                            <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>
+                            <option value="{{ $genre->id }}" {{ $game->genre_id == $genre->id ? 'selected' : '' }}>
                                 {{ $genre->name }}
                             </option>
                         @endforeach
@@ -45,7 +44,7 @@
                               id="description"
                               rows="4"
                               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                              placeholder="Enter game description">{{ old('description') }}</textarea>
+                              placeholder="Enter game description">{{$game->description}}</textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
@@ -55,7 +54,7 @@
                     <input type="number"
                            name="trophies"
                            id="trophies"
-                           value="{{ old('trophies') }}"
+                           value="{{$game->trophies}}"
                            min="0"
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="Enter number of trophies">
@@ -68,7 +67,7 @@
                     <input type="number"
                            name="time"
                            id="time"
-                           value="{{ old('time') }}"
+                           value="{{$game->time}}"
                            min="0"
                            step="0.5"
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -81,7 +80,7 @@
                     <input type="text"
                            name="difficulty"
                            id="difficulty"
-                           value="{{ old('difficulty') }}"
+                           value="{{$game->difficulty}}"
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="Enter difficulty out of 10">
                     <x-input-error :messages="$errors->get('difficulty')" class="mt-2" />
@@ -95,7 +94,7 @@
                     </a>
                     <button type="submit"
                             class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-md transition-colors duration-300">
-                        Create Game
+                        Update game
                     </button>
                 </div>
             </form>

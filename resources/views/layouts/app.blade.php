@@ -51,8 +51,8 @@
 <!-- Hero Section -->
 <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl font-bold mb-4">Game Collection</h1>
-        <p class="text-xl max-w-2xl mx-auto">Discover our curated selection of games with detailed information and ratings</p>
+        <h1 class="text-4xl font-bold mb-4">{{$header}}</h1>
+        <p class="text-xl max-w-2xl mx-auto">{{$header_text}}</p>
     </div>
 </div>
 
