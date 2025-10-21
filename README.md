@@ -14,3 +14,7 @@ made sure the create page works properly now and actually gives the filled in in
 <p> Tried doing the update and delete functions by myself by having the prg02 assignment with me to retrace steps.
 This went very wrong, I went to follow another Laracast video about update and delete and with some small differences like
 using my controller instead of making everything in route I got it to work</p>
+
+<p>21-10-2025</p>
+<p>Made very basic authentication for the edit page, still need to edit the log out route and stuff
+but will do that later today, commiting since I might screw stuff up with it</p>

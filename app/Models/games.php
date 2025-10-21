@@ -22,6 +22,11 @@ class games extends Model
     {
         return $this->belongsTo(genres::class);
     }
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 //$games = new games();
 //$games->name = 'The Legend of Zelda: Breath of the Wild';

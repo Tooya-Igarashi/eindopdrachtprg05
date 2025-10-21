@@ -4,9 +4,10 @@
             {{ __('Profile Information') }}
         </h2>
 
+        <x-slot name="header_text">
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
-        </p>
+        </p></x-slot>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">

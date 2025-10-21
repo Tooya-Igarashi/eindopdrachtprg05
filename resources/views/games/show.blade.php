@@ -8,6 +8,8 @@
     {{$game->name}}
 {{$game->description}}
 {{$game->genre->name}}
+
+    @if($game->user_id === Auth::id())
     <a href="{{ route('games.edit', $game) }}"
        class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
         Edit
@@ -24,4 +26,5 @@
             Delete Game
         </button>
     </form>
+    @endif
 </x-app-layout>

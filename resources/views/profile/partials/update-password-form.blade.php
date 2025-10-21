@@ -4,9 +4,10 @@
             {{ __('Update Password') }}
         </h2>
 
+        <x-slot name="header_text">
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
+        </p></x-slot>
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">

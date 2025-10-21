@@ -19,22 +19,24 @@
 <header class="bg-white shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
-            <div class="flex items-center">
-                <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-600">
-                    {{ config('app.name', 'GameHub') }}
-                </a>
-            </div>
+{{--            <div class="flex items-center">--}}
+{{--                <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-600">--}}
+{{--                    {{ config('app.name', 'GameHub') }}--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
             <!-- Navigation -->
             <nav class="hidden md:flex space-x-8">
                 <x-nav-link href="{{ route('games.index') }}">Games</x-nav-link>
                 <x-nav-button href="{{ route('games.create') }}" >Add Game</x-nav-button>
+                @if(\Illuminate\Support\Facades\Auth::guest())
                 <x-nav-button href="{{ route('login') }}">Log in</x-nav-button>
-
-                @if (Route::has('register'))
-                    <x-nav-button href="{{ route('register') }}"> Register</x-nav-button>
+                <x-nav-button href="{{ route('register') }}"> Register</x-nav-button>
                 @endif
             </nav>
+            @auth
+                @include('layouts.navigation')
+            @endauth
 
             <!-- Mobile menu button -->
             <div class="md:hidden">

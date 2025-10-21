@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\games;
 use App\Models\genres;
+use \Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +68,17 @@ class GamesController extends Controller
 
     public function edit(Games $game)
     {
+        if (Auth::guest()){
+            return redirect()->route('login');
+        }
+
+//        if ($game->users()->isNot(Auth::User())){
+//            abort(403);
+//        }
+        if ($game->user_id !== Auth::id()){
+            abort(403);
+        }
+
         $genres = genres::all();
         return view('games.edit', compact('game'), compact('genres'));
     }
@@ -76,7 +88,7 @@ class GamesController extends Controller
 //        return view('games.show', compact('game'));
 //    }
 //}
-    public function update(string $id)
+    public function update(Games $game)
     {
         request()->validate([
             'name' => 'required|max:100',
@@ -86,9 +98,8 @@ class GamesController extends Controller
             'difficulty' => 'required|max:10',
         ]);
 
-        $games = Games::findOrFail($id);
 
-        $games->update([
+        $game->update([
             'name' => request('name'),
             'genre_id' => request('genre_id'),
             'description' => request('description'),
@@ -97,13 +108,13 @@ class GamesController extends Controller
             'difficulty' => request('difficulty'),
         ]);
 
-        return redirect()->route('games.index');
+        return redirect()->route('games.show', $game);
         //redirect to show does not work? Must find out why.
     }
 
-    public function destroy(string $id)
+    public function destroy(Games $game)
     {
-        Games::findOrFail($id)->delete();
+        $game->delete();
 
         return redirect()->route('games.index');
     }

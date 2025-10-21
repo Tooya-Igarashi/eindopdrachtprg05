@@ -4,6 +4,8 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <x-slot name="header_text">
+        Welcome to your dashboard</x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -12,6 +14,9 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+            <a href="{{ route('profile.destroy') }}">Delete User</a>
+            <a href="{{ route('profile.edit') }}">edit User</a>
+            <a href="{{ route('profile.update') }}">update User</a>
         </div>
     </div>
 </x-app-layout>
