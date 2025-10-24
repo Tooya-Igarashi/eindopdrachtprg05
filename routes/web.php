@@ -53,6 +53,10 @@ Route::resource('create', GamesController::class);
 
 Route::resource('edit', GamesController::class);
 
+Route::get('admin', [GamesController::class, 'admin'])->name('games.admin');
+
+Route::patch('/games/{game}/authenticate', [GamesController::class, 'authenticate'])->name('games.authenticate');
+
 Route::patch('edit', [GamesController::class, 'update'])->name('games.update');
 
 Route::delete('edit', [GamesController::class, 'destroy'])->name('games.destroy');

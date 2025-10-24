@@ -35,6 +35,10 @@ class GamesController extends Controller
     // <select> in de view
     public function create()
     {
+        if (Auth::guest()){
+            return redirect()->route('login');
+        }
+
         $genres = genres::all();
         return view('games.create', compact('genres'));
     }
@@ -88,6 +92,16 @@ class GamesController extends Controller
 //        return view('games.show', compact('game'));
 //    }
 //}
+
+    public function admin()
+    {
+        if (Auth::guest() || Auth::user()->role !== 1){
+            return redirect()->route('login');
+        }
+        $games = Games::all();
+        $genres = genres::all();
+        return view('games.admin', compact('games'), compact('genres'));
+    }
     public function update(Games $game)
     {
         request()->validate([
@@ -117,5 +131,16 @@ class GamesController extends Controller
         $game->delete();
 
         return redirect()->route('games.index');
+    }
+
+    public function authenticate(Games $game)
+    {
+        if ($game->validation_check === 0) {
+            $game->update(['validation_check' => 1]);
+        } else if ($game->validation_check === 1) {
+            $game->update(['validation_check' => 0]);
+        }
+
+        return redirect()->back();
     }
 }

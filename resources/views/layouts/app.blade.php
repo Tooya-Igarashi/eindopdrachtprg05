@@ -28,10 +28,11 @@
             <!-- Navigation -->
             <nav class="hidden md:flex space-x-8">
                 <x-nav-link href="{{ route('games.index') }}">Games</x-nav-link>
-                <x-nav-button href="{{ route('games.create') }}" >Add Game</x-nav-button>
                 @if(\Illuminate\Support\Facades\Auth::guest())
                 <x-nav-button href="{{ route('login') }}">Log in</x-nav-button>
                 <x-nav-button href="{{ route('register') }}"> Register</x-nav-button>
+                @else                <x-nav-button href="{{ route('games.create') }}" >Add Game</x-nav-button>
+
                 @endif
             </nav>
             @auth

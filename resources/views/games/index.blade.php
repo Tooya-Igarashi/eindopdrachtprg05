@@ -10,6 +10,9 @@
         <!-- Games Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($games as $game)
+                @if($game->validation_check === 0)
+
+                    @else
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $game->name }}</h3>
@@ -46,6 +49,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
 

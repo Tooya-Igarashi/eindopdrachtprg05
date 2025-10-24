@@ -28,7 +28,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if (Auth::user()->role === 1) {
+            return redirect()->intended(route('games.admin', absolute: false));
+        } else{
+        return redirect()->intended(route('games.index', absolute: false));}
     }
 
     /**
@@ -42,6 +45,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->intended(route('games.index', absolute: false));
     }
 }

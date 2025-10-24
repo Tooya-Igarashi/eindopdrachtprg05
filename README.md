@@ -18,3 +18,8 @@ using my controller instead of making everything in route I got it to work</p>
 <p>21-10-2025</p>
 <p>Made very basic authentication for the edit page, still need to edit the log out route and stuff
 but will do that later today, commiting since I might screw stuff up with it</p>
+
+<p>24-10-2025</p>
+<p>Made the admin page and there with it a way to authenticate posts, so the admin first has to authenticate post
+before they can be seen, should I change the default validation_check value then? A question for later.
+Need to update the dashboard to go to the admin page instead of the dashboard laravel made</p>

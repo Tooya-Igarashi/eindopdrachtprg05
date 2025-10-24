@@ -16,6 +16,7 @@ class games extends Model
         'trophies',
         'time',
         'difficulty',
+        'validation_check',
     ];
 
     public function genre(): BelongsTo
