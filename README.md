@@ -23,3 +23,8 @@ but will do that later today, commiting since I might screw stuff up with it</p>
 <p>Made the admin page and there with it a way to authenticate posts, so the admin first has to authenticate post
 before they can be seen, should I change the default validation_check value then? A question for later.
 Need to update the dashboard to go to the admin page instead of the dashboard laravel made</p>
+
+<p>25-10-2025</p>
+<p>I got the search and filter functions to work, I watched multiple tutorial videos online for it and got reminded 
+of the form get function, which made me sort of understand how the chess website works with filters since the url changes.
+Got it to work in the end</p>

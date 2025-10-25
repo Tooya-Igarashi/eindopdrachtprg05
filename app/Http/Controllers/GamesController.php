@@ -11,10 +11,23 @@ use Illuminate\Support\Facades\DB;
 class GamesController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $games = Games::all();
-        return view('games.index', compact('games'));
+        $games = Games::query();
+        $genres = genres::all();
+
+        if ($request->has('name') && $request->name != '') {
+            $games->where('name', 'like', '%' . $request->name . '%')
+                ->orWhere('description', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->has('genre') && $request->genre != '') {
+            $games->where('genre_id', $request->genre);
+        }
+
+        $games = $games->get();
+
+        return view('games.index', compact('games', 'genres'));
 
 //        $games = new games();
 //        $games->name = 'The Legend of Zelda: Breath of the Wild';
