@@ -8,6 +8,28 @@
     {{$game->name}}
 {{$game->description}}
 {{$game->genre->name}}
+    @foreach($comments as $comment)
+        <div class="border p-4 my-2">
+            <h4 class="font-bold">{{ $comment->title }}</h4>
+            <p>{{ $comment->contents }}</p>
+            <p class="text-sm text-gray-500">By User #{{ $comment->user_id }}</p>
+        </div>
+    @endforeach
+
+    <form method="POST" action="{{ route('storeComments') }}" class="max-w-lg mx-auto mt-8">
+        @csrf
+        <h3 class="text-xl font-bold mb-4">Add a Comment</h3>
+        <input type="hidden" name="game_id" value="{{ $game->id }}">
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+            <input type="text" name="title" id="title" class="w-full px-3 py-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="contents" class="block text-gray-700 font-bold mb-2">Comment</label>
+            <textarea name="contents" id="contents" rows="4" class="w-full px-3 py-2 border rounded-md" required></textarea>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Submit Comment</button>
+    </form>
 
     @if($game->user_id === Auth::id())
     <a href="{{ route('games.edit', $game) }}"

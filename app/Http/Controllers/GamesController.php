@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\games;
 use App\Models\genres;
+use App\Models\User;
 use \Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +39,26 @@ class GamesController extends Controller
 
     public function show(Games $game)
     {
-        return view('games.show', compact('game'));
+        $comments = Comments::where('game_id', $game->id)->get();
+//        $comments = Comments::all();
+        return view('games.show', compact('game'), compact('comments'));
+    }
+
+    public function storeComments(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:100',
+            'contents' => 'required',
+        ]);
+        $comment = new Comments();
+        $comment->user_id = Auth::id();
+        $comment->game_id = $request->input('game_id');
+        $comment->title = $request->input('title');
+        $comment->contents = $request->input('contents');
+
+        $comment->save();
+
+        return redirect()->route('games.show', $request->input('game_id'));
     }
 
     //voor veel op 1 relatie
@@ -48,12 +69,13 @@ class GamesController extends Controller
     // <select> in de view
     public function create()
     {
-        if (Auth::guest()){
-            return redirect()->route('login');
-        }
+//        if (Auth::guest()){
+//            return redirect()->route('login');
+//        }
 
+        $comments = Comments::where('user_id', Auth::id())->get();
         $genres = genres::all();
-        return view('games.create', compact('genres'));
+        return view('games.create', compact('genres'), compact('comments'));
     }
 
     //form data
@@ -85,9 +107,9 @@ class GamesController extends Controller
 
     public function edit(Games $game)
     {
-        if (Auth::guest()){
-            return redirect()->route('login');
-        }
+//        if (Auth::guest()){
+//            return redirect()->route('login');
+//        }
 
 //        if ($game->users()->isNot(Auth::User())){
 //            abort(403);
@@ -141,6 +163,9 @@ class GamesController extends Controller
 
     public function destroy(Games $game)
     {
+        if ($game->user_id !== Auth::id()){
+            abort(403);
+        }
         $game->delete();
 
         return redirect()->route('games.index');

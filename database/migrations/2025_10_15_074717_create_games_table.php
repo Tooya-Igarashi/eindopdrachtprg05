@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('time', 50);
             $table->string('difficulty', 50);
             $table->string('image')->nullable();
-            $table->boolean('validation_check')->default(false);
+            $table->boolean('validation_check')->default(true);
             $table->timestamps();
         });
     }

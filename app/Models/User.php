@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(games::class);
     }
+
+    public function comments(): User|HasMany
+    {
+        return $this->hasMany(Comments::class);
+    }
 }
