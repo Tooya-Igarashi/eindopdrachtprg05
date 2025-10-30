@@ -28,3 +28,11 @@ Need to update the dashboard to go to the admin page instead of the dashboard la
 <p>I got the search and filter functions to work, I watched multiple tutorial videos online for it and got reminded 
 of the form get function, which made me sort of understand how the chess website works with filters since the url changes.
 Got it to work in the end</p>
+
+<p>26-10-2025</p>
+<p>Created comments, and with it dubbel varification, user now has to make at least 3 comments before they are allowed
+to create a new post</p>
+
+<p>27-10-2025</p>
+<p>Made safe delete so only admin can see it, made some visual changes in navigation.
+Just want to try to be able to add images and I think I an done</p>

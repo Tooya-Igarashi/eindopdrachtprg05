@@ -23,7 +23,7 @@ Hello
             <td class="px-4 py-2">{{ $game->id }}</td>
             <td class="px-4 py-2">{{ $game->name }}</td>
             <td class="px-4 py-2">{{ $game->genre->name }}</td>
-            <td class="px-4 py-2">{{ $game->description}}</td>
+            <td class="px-4 py-2">{{ Str::limit($game->description, 50)}}</td>
             <td class="px-4 py-2">{{ $game->time}}</td>
             <td class="px-4 py-2">{{ $game->difficulty}}</td>
             <td class="px-4 py-2">{{ $game->created_at}}</td>

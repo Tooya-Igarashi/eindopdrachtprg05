@@ -39,9 +39,9 @@ class GamesController extends Controller
 
     public function show(Games $game)
     {
-        $comments = Comments::where('game_id', $game->id)->get();
-//        $comments = Comments::all();
-        return view('games.show', compact('game'), compact('comments'));
+        $comments = Comments::with('user')->where('game_id', $game->id)->get();
+
+        return view('games.show', compact('game', 'comments'));
     }
 
     public function storeComments(Request $request)
@@ -179,6 +179,10 @@ class GamesController extends Controller
             $game->update(['validation_check' => 0]);
         }
 
-        return redirect()->back();
+        if (Auth::user()->role !== 1){
+            return redirect()->route('games.index');
+        }else{
+            return redirect()->route('games.admin');
+        }
     }
 }
