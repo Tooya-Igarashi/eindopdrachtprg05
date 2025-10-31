@@ -5,6 +5,12 @@
     <x-slot name="header_text">
         view information on your post</x-slot>
 
+    @if($game->image)
+    <div class="flex justify-start mb-4">
+        <img src="{{ asset('storage/' .$game->image) }}" alt="{{$game->name}}" width="250" class="w-64 h-64 object-cover rounded-md">
+    </div>
+    @endif
+
     <h2 class="text-xl font-bold text-gray-900 mb-2">{{$game->name}}</h2>
     <h3 class="text-x font-medium text-gray-900 mb-2">Genre: {{$game->genre->name}}</h3>
     <p>{{$game->description}}</p>

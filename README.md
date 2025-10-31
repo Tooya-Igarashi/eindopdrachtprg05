@@ -36,3 +36,8 @@ to create a new post</p>
 <p>27-10-2025</p>
 <p>Made safe delete so only admin can see it, made some visual changes in navigation.
 Just want to try to be able to add images and I think I an done</p>
+
+<p>28-10-2025</p>
+<p>Made it so users can upload images by adding a photos map in storage/public and linking this
+with the public folder with the command php artisan storage:link. Also made some new dummy data
+all with images</p>

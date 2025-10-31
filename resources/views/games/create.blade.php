@@ -4,15 +4,14 @@
     </x-slot>
     <x-slot name="header_text">
         Create a new game post</x-slot>
-    @if($comments->count() > 2)
+    @if($comments->count() > 2 || Auth::user()->role === 1)
     <div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white shadow-sm rounded-lg p-6">
             <h1 class="text-2xl font-bold text-gray-900 mb-6">Add New Game</h1>
 
-            <form method="post" action="{{ route('games.store') }}" class="space-y-6">
+            <form method="post" action="{{ route('games.store') }}" class="space-y-6" enctype="multipart/form-data">
                 @csrf
 
-                <!-- Name Field -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Game Name</label>
                     <input type="text"
@@ -86,6 +85,13 @@
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="Enter difficulty out of 10">
                     <x-input-error :messages="$errors->get('difficulty')" class="mt-2" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Image (not required)</label>
+                    <input type="file" name="image" id="image"
+                           class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-md transition-colors duration-300"
+                           accept="image/*">
                 </div>
 
                 <!-- Submit Button -->

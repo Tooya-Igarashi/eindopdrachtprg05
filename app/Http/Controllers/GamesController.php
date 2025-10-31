@@ -81,6 +81,12 @@ class GamesController extends Controller
     //form data
     public function store(Request $request)
     {
+//        $filename = '';
+//        if ($request->hasFile('img')) {
+//            $filename = time() . '_' . $request->img->getClientOriginalName();
+//
+//            $request->img->move(public_path('images'), $filename);
+//        }
         //validate
         $request->validate([
             'name' => 'required|max:100',
@@ -88,16 +94,24 @@ class GamesController extends Controller
             'trophies' => 'required|numeric:',
             'time' => 'required|numeric',
             'difficulty' => 'required|max:10',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048'
         ]);
+
+        $imagePath = null;
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('photos', 'public');
+        }
 
         //inset into sql
         $game = new Games();
+        $game->user_id = Auth::id();
         $game->name = $request->input('name');
         $game->genre_id = $request->input('genre_id');
         $game->description = $request->input('description');
         $game->trophies = $request->input('trophies');
         $game->time = $request->input('time');
         $game->difficulty = $request->input('difficulty');
+        $game->image = $imagePath;
 
         $game->save();
 

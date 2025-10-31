@@ -44,6 +44,11 @@
                     @else
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="p-6">
+                        @if($game->image)
+                            <div class="flex justify-start mb-4">
+                                <img src="{{ asset('storage/' .$game->image) }}" alt="{{$game->name}}" width="300" class="w-64 h-64 object-cover rounded-md">
+                            </div>
+                        @endif
                         <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $game->name }}</h3>
                         <h4>{{$game->genre->name}}</h4>
 
