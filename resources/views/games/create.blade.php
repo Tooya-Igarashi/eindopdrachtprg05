@@ -112,7 +112,7 @@
         <div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm rounded-lg p>6">
                 <h1 class="text-2xl font-bold text-gray-900 mb-6">Insufficient Comments</h1>
-                <p class="text-gray-700">You have made {{$comments->count()}} comment.
+                <p class="text-gray-700">You have made {{$comments->count()}} comments.
                 <br> you must make at least 3 comments to create a new post</p>
     @endif
 
