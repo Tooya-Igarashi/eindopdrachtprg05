@@ -15,6 +15,9 @@ Hello
         <th class="px-4 py-2">Difficulty</th>
         <th class="px-4 py-2">Created At</th>
         <th class="px-4 py-2">Updated At</th>
+        <th class="px-4 py-2">Details</th>
+        <th class="px-4 py-2">Validate</th>
+        <th class="px-4 py-2">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +29,13 @@ Hello
             <td class="px-4 py-2">{{ Str::limit($game->description, 50)}}</td>
             <td class="px-4 py-2">{{ $game->time}}</td>
             <td class="px-4 py-2">{{ $game->difficulty}}</td>
-            <td class="px-4 py-2">{{ $game->created_at}}</td>
-            <td class="px-4 py-2">{{ $game->updated_at}}</td>
+            <td class="px-4 py-2">{{ $game->created_at->format('D-M-Y')}}</td>
+            <td class="px-4 py-2">{{ $game->updated_at->format('D-M-Y')}}</td>
+            <td>
+                <a href="{{ route('games.show', $game) }}"
+                   class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                    Show
+                </a>
             <td>
                 <form method="POST" action="{{ route('games.authenticate', $game) }}" class="mt-4">
                     @csrf
@@ -35,14 +43,24 @@ Hello
                     @if($game->validation_check === 0)
                     <button type="submit"
                             class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
-                        Authenticate {{$game->validation_check}}
+                        Authenticate
                     </button>
                     @elseif($game->validation_check === 1)
                         <button type="submit"
                                 class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
-                            Reverse Authentication {{$game->validation_check}}
+                            Unauthenticate
                         </button>
                     @endif
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="{{ route('games.destroy', $game) }}" class="mt-4">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                            class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                        Delete
+                    </button>
                 </form>
             </td>
         </tr>

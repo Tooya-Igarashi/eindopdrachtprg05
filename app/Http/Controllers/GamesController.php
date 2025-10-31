@@ -182,7 +182,7 @@ class GamesController extends Controller
         }
         $game->delete();
 
-        return redirect()->route('games.index');
+        return redirect()->route('games.admin');
     }
 
     public function authenticate(Games $game)
